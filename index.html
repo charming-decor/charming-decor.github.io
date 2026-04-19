@@ -38,20 +38,29 @@
         .container {
             margin: 50px auto;
             padding: 20px;
-            max-width: 900px;
+            max-width: 1200px;
+        }
+
+        /* Tiled Image Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid */
+            gap: 20px;
+            justify-items: center;
         }
 
         .thumbnail {
-            width: 300px;
+            width: 100%;
             height: auto;
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .thumbnail:hover {
             transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         /* Modal Styling */
@@ -120,12 +129,22 @@
 
 <!-- Header -->
 <header>
-    <h1>My Portfolio</h1>
+    <h1>Charming Decor Portfolio</h1>
 </header>
 
 <!-- Main Content -->
 <div class="container">
-    <img src="images/image1.jpg" alt="Portfolio Image" class="thumbnail" id="myImg">
+    <p>Click on any image to view it in full size:</p>
+
+    <!-- Tiled Image Gallery -->
+    <div class="gallery">
+        <img src="images/image1.jpg" alt="Portfolio Image 1" class="thumbnail" id="myImg1">
+        <img src="images/image2.jpg" alt="Portfolio Image 2" class="thumbnail" id="myImg2">
+        <img src="images/image3.jpg" alt="Portfolio Image 3" class="thumbnail" id="myImg3">
+        <img src="images/image4.jpg" alt="Portfolio Image 4" class="thumbnail" id="myImg4">
+        <img src="images/image5.jpg" alt="Portfolio Image 5" class="thumbnail" id="myImg5">
+        <img src="images/image6.jpg" alt="Portfolio Image 6" class="thumbnail" id="myImg6">
+    </div>
 
     <!-- The Modal -->
     <div id="myModal" class="modal">
@@ -145,16 +164,19 @@
     // Get the modal
     var modal = document.getElementById("myModal");
 
-    // Get the image and insert it inside the modal
-    var img = document.getElementById("myImg");
+    // Get all the image thumbnails
+    var images = document.querySelectorAll(".thumbnail");
     var modalImg = document.getElementById("img01");
     var captionText = document.getElementById("caption");
 
-    img.onclick = function() {
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
-    }
+    // Loop through each image and add a click event to open the modal
+    images.forEach(function(img) {
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        };
+    });
 
     // Get the <span> element that closes the modal
     var span = document.getElementById("closeBtn");
